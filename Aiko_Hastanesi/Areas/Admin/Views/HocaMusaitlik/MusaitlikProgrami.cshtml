@@ -1,0 +1,46 @@
+﻿@using Aiko_Hastanesi.Rol
+@model IEnumerable<HocaMusaitlik>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Hoca Müsaitliği</h2>
+    <div class="row">
+        @foreach (var hoca in Model)
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">@hoca.Hoca.AdSoyad</h5>
+                        @if (User.IsInRole(Rol.Role_Asistan))
+                        {
+                            <span class="badge bg-light text-primary">Randevu Alınabilir</span>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center
+                                @(User.IsInRole(Rol.Role_Asistan) ? "availability-slot" : "")"
+                                data-hoca-name="@hoca.Hoca.AdSoyad">
+                                <span>
+                                    <i class="bi bi-calendar"></i> @hoca.Tarih.ToShortDateString()
+                                </span>
+                                <span>
+                                    <i class="bi bi-clock"></i> @hoca.BaslangicSaati.ToShortTimeString() - @hoca.BitisSaati.ToShortTimeString()
+                                </span>
+                                @if (User.IsInRole(Rol.Role_Asistan))
+                                {
+                                    <a asp-action="Create"
+                                       asp-route-hocaId="@hoca.Id"
+                                       class="btn btn-sm btn-outline-primary book-appointment">
+                                        Randevu Al
+                                    </a>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

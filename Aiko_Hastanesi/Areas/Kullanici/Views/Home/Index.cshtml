@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Pediatri Departmanı Yönetim Sistemi";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Pediatri Departmanı Yönetim Sistemi</h1>
+            <p class="lead text-muted">Çocuk Sağlığı ve Bakımında Mükemmellik</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-lg">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
+                            <h3 class="card-title">Hasta Yönetimi</h3>
+                            <p class="card-text text-muted">
+                                Hasta kayıtlarını yönetin, tıbbi geçmişlerini takip edin ve tedavi süreçlerini izleyin.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">
+                                Hasta Listesi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-lg">
+                        <div class="card-body text-center">
+                            <i class="fas fa-procedures fa-3x text-primary mb-3"></i>
+                            <h3 class="card-title">Servis Yönetimi</h3>
+                            <p class="card-text text-muted">
+                                Pediatri servislerindeki yatak kapasitelerini ve hasta dağılımını takip edin.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">
+                                Servisleri Görüntüle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-lg">
+                        <div class="card-body text-center">
+                            <i class="fas fa-notes-medical fa-3x text-primary mb-3"></i>
+                            <h3 class="card-title">Randevu Sistemi</h3>
+                            <p class="card-text text-muted">
+                                Pediatri uzmanlarıyla kolay randevu oluşturun ve mevcut randevuları yönetin.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">
+                                Randevu Al
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle me-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            }
+    </style>
+}

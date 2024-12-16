@@ -1,0 +1,104 @@
+﻿@using Aiko_Hastanesi.Rol
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aiko_Hastanesi</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+   
+    <header class="bg-primary text-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <a class="navbar-brand fw-bold">Aiko_Hastanesi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Kullanici" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (User.IsInRole(Rol.Role_Admin))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="hocaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hoca
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="hocaDropdown">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Hoca" asp-action="Index">Hoca Listesi</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="HocaMusaitlik" asp-action="Index">Hoca Müsaitliği</a></li>
+                                <li><a class="dropdown-item" asp-area="Kullanici" asp-controller="Randevu" asp-action="Index">Hoca Programı</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="asistanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Asistan
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="asistanDropdown">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Asistan" asp-action="Index">Asistan Listesi</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Nobet" asp-action="Index">Asistan Nöbeti</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole(Rol.Role_Asistan))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Kullanici" asp-controller="Randevu" asp-action="Index">Hoca Programı</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Kullanici" asp-controller="Randevu" asp-action="RandevuListesi">Randevularım</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Nobet" asp-action="Calendar">Asistan Takvimi</a>
+                    </li>
+                    @if (User.IsInRole(Rol.Role_Admin))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Bolum" asp-action="Index">Bolum</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Kullanici" asp-controller="Randevu" asp-action="AllRandevuListesi">Randevular</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Acil" asp-action="Index">Acil</a>
+                        </li>
+                    }
+                </ul>
+                
+                <div class="ms-auto">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="container my-4 flex-grow-1">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-white mt-auto py-3">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 Aiko_Hastanesi | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-light">Privacy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

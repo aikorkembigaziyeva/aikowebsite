@@ -1,0 +1,40 @@
+﻿@model HocaMusaitlik
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Müsaitlik Silme Onayı</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="form-group">
+                    <h3>Müsaitlik Silme İşlemi</h3>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Asistan:</dt>
+                        <dd class="col-sm-8">@Model.Hoca?.AdSoyad</dd>
+
+                        <dt class="col-sm-4">Tarih:</dt>
+                        <dd class="col-sm-8">@Model.Tarih.ToString("dd MMMM yyyy")</dd>
+
+                        <dt class="col-sm-4">Başlangıç Saati:</dt>
+                        <dd class="col-sm-8">@Model.BaslangicSaati.ToString("HH:mm")</dd>
+
+                        <dt class="col-sm-4">Bitiş Saati:</dt>
+                        <dd class="col-sm-8">@Model.BitisSaati.ToString("HH:mm")</dd>
+                    </dl>
+                    <p class="text-danger">Bu müsaitliği silmek istediğinizden emin misiniz?</p>
+                    <form method="post">
+                        <input asp-for="Id" hidden />
+                        <button type="submit" class="btn btn-danger">Evet, Sil</button>
+                        <a asp-action="Index" class="btn btn-secondary">Hayır, İptal</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

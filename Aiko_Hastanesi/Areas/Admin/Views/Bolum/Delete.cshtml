@@ -1,0 +1,39 @@
+﻿@model Bolum
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Bölüm Silme Onayı</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="form-group">
+                    <h3>Bölüm Silme İşlemi</h3>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Bölüm Adı:</dt>
+                        <dd class="col-sm-8">@Model.Ad</dd>
+
+                        <dt class="col-sm-4">Yatak Sayısı:</dt>
+                        <dd class="col-sm-8">@Model.YatakSayisi</dd>
+
+                        <dt class="col-sm-4">Sorumlu Hoca:</dt>
+                        <dd class="col-sm-8">@Model.Hoca?.AdSoyad</dd>
+                    </dl>
+
+                    <p class="text-danger">Bu bölümü silmek istediğinizden emin misiniz?</p>
+
+                    <form method="post">
+                        <input asp-for="Id" hidden />
+                        <button type="submit" class="btn btn-danger">Evet, Sil</button>
+                        <a asp-action="Index" class="btn btn-secondary">Hayır, İptal</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

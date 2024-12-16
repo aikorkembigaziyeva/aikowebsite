@@ -1,0 +1,51 @@
+﻿@model RandevuVM
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Randevu Oluştur</h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">@Model.Randevu.HocaMusaitlik?.Hoca?.AdSoyad</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <input asp-for="Randevu.HocaMusaitlikID" type="hidden" />
+
+                        <div class="mb-3">
+                            <label asp-for="Randevu.HocaMusaitlikID" class="form-label">Musaitlik</label>
+                            <select asp-for="Randevu.HocaMusaitlikID"
+                                    asp-items="Model.HocaMusaitlikList"
+                                    class="form-control">
+                                <option value="">Bir zaman dilimi seçin</option>
+                            </select>
+                            <span asp-validation-for="Randevu.HocaMusaitlikID" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Randevu.Sebep" class="form-label">Randevu Nedeni</label>
+                            <textarea asp-for="Randevu.Sebep" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Randevu.Sebep" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <p><strong>Tarih:</strong> @Model.Randevu.HocaMusaitlik?.Tarih.ToShortDateString()</p>
+                            <p>
+                                <strong>Saat:</strong>
+                                @Model.Randevu.HocaMusaitlik?.BaslangicSaati.ToShortTimeString() -
+                                @Model.Randevu.HocaMusaitlik?.BitisSaati.ToShortTimeString()
+                            </p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Randevuyu Onayla</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

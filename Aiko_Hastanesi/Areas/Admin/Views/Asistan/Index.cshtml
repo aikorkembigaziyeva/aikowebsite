@@ -1,0 +1,58 @@
+﻿@model List<Asistan>
+
+<div class="card shadow-lg border-0 mt-4">
+    <div class="card-header" style="background-color: #87CEEB; color: #ffffff; padding: 1rem;">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Asistan Listesi</h2>
+            <a asp-controller="Asistan" asp-action="Create" class="btn btn-light btn-sm">
+                <i class="bi bi-plus-circle"></i> Yeni Asistan Ekle
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-responsive-md">
+            <thead class="bg-light">
+                <tr class="text-center">
+                    <th>Ad Soyad</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                    <th>Adres</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var obj in Model.OrderBy(u => u.AdSoyad))
+                    {
+                        <tr>
+                            <td>@obj.AdSoyad</td>
+                            <td>@obj.Telefon</td>
+                            <td>@obj.Email</td>
+                            <td>@obj.Adres</td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-controller="Asistan" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i> Düzenle
+                                    </a>
+                                    <a asp-controller="Asistan" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger btn-sm delete-btn">
+                                        <i class="fa fa-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-3">
+                            Kayıtlı bir asistan bulunmamaktadır.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

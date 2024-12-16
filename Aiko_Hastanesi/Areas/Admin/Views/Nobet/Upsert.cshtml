@@ -1,0 +1,126 @@
+﻿@model NobetVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">
+                    @(Model.Nobet.Id != 0 ? "Nobet Güncelle" : "Yeni Nobet Oluştur")
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Nobet.Id" type="hidden" />
+            <div class="border p-4 rounded">
+                <div class="form-floating py-3 col-12">
+                    <select asp-for="@Model.Nobet.AsistanID" asp-items="@Model.AsistanList" class="form-select border-0 shadow-sm">
+                        <option value="" disabled selected>-- Asistan Seç --</option>
+                    </select>
+                    <label asp-for="Nobet.AsistanID" class="ms-2">Asistan</label>
+                    <span asp-validation-for="Nobet.AsistanID" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-3 col-12">
+                    <select asp-for="@Model.Nobet.BolumID" asp-items="@Model.BolumList" class="form-select border-0 shadow-sm">
+                        <option value="" disabled selected>-- Bölüm Seç --</option>
+                    </select>
+                    <label asp-for="Nobet.BolumID" class="ms-2">Bölüm</label>
+                    <span asp-validation-for="Nobet.BolumID" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-3 col-12">
+                    <input asp-for="Nobet.Tarih" class="form-control border-0 shadow-sm" type="date" />
+                    <label asp-for="Nobet.Tarih" class="ms-2">Tarih</label>
+                    <span asp-validation-for="Nobet.Tarih" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-3 col-12">
+                    <input asp-for="Nobet.BaslangicSaati" class="form-control border-0 shadow-sm" type="time" />
+                    <label asp-for="Nobet.BaslangicSaati" class="ms-2">Başlangıç Saati</label>
+                    <span asp-validation-for="Nobet.BaslangicSaati" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-3 col-12">
+                    <input asp-for="Nobet.BitisSaati" class="form-control border-0 shadow-sm" type="time" />
+                    <label asp-for="Nobet.BitisSaati" class="ms-2">Bitiş Saati</label>
+                    <span asp-validation-for="Nobet.BitisSaati" class="text-danger"></span>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success rounded-pill form-control shadow-sm">
+                            @(Model.Nobet.Id != 0 ? "Güncelle" : "Oluştur")
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Nobet" asp-action="Index" class="btn btn-secondary rounded-pill form-control shadow-sm">
+                            Listeye Dön
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}
+
+<style>
+    .form-floating label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-floating input:focus + label,
+    .form-floating select:focus + label {
+        font-size: 0.8rem;
+        color: #495057;
+    }
+
+    button {
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+    .card-header {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+</style>
